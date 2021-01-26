@@ -10,9 +10,9 @@ LOG_LEVEL=debug
 DB_CONNECTION=mysql
 DB_HOST=10.120.3.122
 DB_PORT=3306
-DB_DATABASE=evilwrer_jugement 
+DB_DATABASE=evilwrer_jugement
 DB_USERNAME=evilwrer_jugement
-DB_PASSWORD=EwpQxmVORj,}
+DB_PASSWORD=AaL9i4XSoF$z
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
