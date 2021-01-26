@@ -28,11 +28,9 @@ class AppServiceProvider extends ServiceProvider
     {
 
         Schema::defaultStringLength(191);
-        
-        // if (Schema::hasTable('document')) {
-        //     View::share('templates', Document::get());
-        // }
 
-        View::share('templates', []);
+        if (Schema::hasTable('document')) {
+            View::share('templates', Document::get());
+        }
     }
 }
