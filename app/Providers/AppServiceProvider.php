@@ -26,8 +26,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (Schema::hasTable('document')) {
-            View::share('templates', Document::get());
-        }
+        // if (Schema::hasTable('document')) {
+        //     View::share('templates', Document::get());
+        // }
+
+        View::share('templates', []);
     }
 }
