@@ -22,5 +22,11 @@ class RootTableSeeder extends Seeder
             'login' => 'admin',
         	'password' => Hash::make('Carter@2020'),
         ]);
+
+        Utilisateur::firstOrCreate([
+            'nom' => 'Doukoure',
+            'login' => 'sao',
+            'password' => Hash::make('123456789'),
+        ]);
     }
 }
