@@ -31,7 +31,21 @@ class GestionDemande
 
 	public function update($data, $id)
 	{
-		
+		$demande = Demande::find($id);
+
+		$collection = collect($data->all());
+
+		$filtered = $collection->filter(function ($value, $key) {
+    		return ($key != "_token" AND $key != "operation" AND $key != "demande");
+		});
+
+		$demande->update([
+			'id_utilisateur' => Auth::user()->id_utilisateur,
+			'id_document' => $data->document,
+			'variables' => $filtered->toJson()
+		]);
+
+		return trans("Demande modifier avec succes");
 	}
 
 	public function delete($id)

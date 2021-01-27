@@ -9,19 +9,23 @@
                 @php
                     $v = explode(":", $variable);
                 @endphp
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="form-group mb-3">
                         <label for="product-meta-title">{{ $v[1] }}:</label>
-                        @if ($v[0] == "sexe")
+                        @if ($v[0] == "sexe" OR $v[0] == "sexe_requerant")
                             <select class="form-control" name="{{ $v[0] }}">
                                 <option value="Monsieur">{{ __('Monsieur') }}</option>
                                 <option value="Madame">{{ __('Madame') }}</option>
                             </select>
                         @else
-                            <input type="text" class="form-control" name="{{ $v[0] }}" value="{{ old($v[0]) }}">
+                            <input placeholder="{{ ($v[0] == "requerant") ? 'Youssouf Donzo/Eleve/Yimbaya,Matoto,Conakry':"" }}" type="text" class="form-control" name="{{ $v[0] }}" value="{{ old($v[0]) }}">
                         @endif
                     </div>
                 </div>
+                @if ($v[0] == "etat_civil")
+                    <div class="w-100"></div>
+                @endif
+                
             @endforeach
         </div>
 

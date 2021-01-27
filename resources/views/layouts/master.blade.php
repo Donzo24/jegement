@@ -274,7 +274,7 @@
 
                             @foreach ($templates as $template)
                                 <li>
-                                    <a href="{{ route('demandes.show', $template->slug) }}">
+                                    <a href="{{ route('documents.show', $template->slug) }}">
                                         <i data-feather="calendar"></i>
                                         <span> {{ $template->nom }} </span>
                                     </a>

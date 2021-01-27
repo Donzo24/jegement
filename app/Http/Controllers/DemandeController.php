@@ -51,52 +51,52 @@ class DemandeController extends Controller
      */
     public function show($id)
     {
-        $doc = Document::whereSlug($id)->first();
-
-        return view('demande', [
-            'document' => $doc,
-            'demandes' => $doc->demandes()->paginate(15),
-            'form' => 'forms.demande.create'
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-
-        $mois = explode(" ", dateFormat(now()))[1];
-        $an = number_to_word(explode(" ", dateFormat(now()))[2]);
-        $jour = number_to_word(explode(" ", dateFormat(now()))[0]);
-
-        $date_lettre = ucwords("$jour $mois $an");
-
         $demande = Demande::find($id);
         $template = $demande->document->template;
 
+        $now = dateFormat(json_decode($demande->variables, true)['date_jour'], "mysql");
+
+        $mois = explode(" ", dateFormat($now))[1];
+        $an = number_to_word(explode(" ", dateFormat($now))[2]);
+        $jour = number_to_word(explode(" ", dateFormat($now))[0]);
+
+        $date_lettre = ucwords("$jour $mois $an");
+
         $templateProcessor = new TemplateProcessor(storage_path("app/$template"));
 
-        $templateProcessor->setValues(json_decode($demande->variables, true));
+        $templateProcessor->setValue("date_jour", dateFormat($now));
 
         foreach ($demande->document->datas() as $key => $value) {
             $t = explode(":", $value);
             $templateProcessor->setValue($t[0], $t[1]);
         }
 
-        $templateProcessor->setValue("genre", "Fille");
-
-        if (json_decode($demande->variables, true)['sexe'] == "Mr" OR json_decode($demande->variables, true)['sexe'] == "Monsieur") {
-            $templateProcessor->setValue("genre", "Fils");
-            $templateProcessor->setValue("accord", " ");
-        }else{
-            $templateProcessor->setValue("accord", "e");
+        if (!isset(json_decode($demande->variables, true)['requerant'])) {
+            return back()->with('msg', "Erreur");
         }
 
-        $templateProcessor->setValue("date_jour", dateFormat(now()));
+        $requerants = explode("/", json_decode($demande->variables, true)['requerant']);
+        if (count($requerants) < 3) {
+            return back()->with('msg', "Erreur");
+        }
+
+        $templateProcessor->setValue("requerant", $requerants[0]);
+        $templateProcessor->setValue("profession", $requerants[1]);
+        $templateProcessor->setValue("adresse", $requerants[2]);
+
+        $templateProcessor->setValues(json_decode($demande->variables, true));
+
+        if (json_decode($demande->variables, true)['sexe_requerant'] == "Monsieur") {
+            $templateProcessor->setValue("genre", "Fils");
+            $templateProcessor->setValue("accord_1", " ");
+            $templateProcessor->setValue("accord_2", "le requérant");
+        }else{
+            $templateProcessor->setValue("accord_1", "e");
+            $templateProcessor->setValue("accord_2", "la requérante");
+            $templateProcessor->setValue("genre", "Fille");
+        }
+
+        
         $templateProcessor->setValue("date_lettre", $date_lettre);
 
         $annee = explode("/", json_decode($demande->variables, true)['date_naissance'])[2];
@@ -111,15 +111,33 @@ class DemandeController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $demande = Demande::find($id);
+
+        return view('demande', [
+            'demandes' => [],
+            'document' => $demande->document,
+            'form' => 'forms.demande.edit',
+            'update' => $demande
+        ]);
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DemandeCreateRequest $request, GestionDemande $gestion, $id)
     {
-        //
+        return back()->with('info', $gestion->update($request, $id));
     }
 
     /**

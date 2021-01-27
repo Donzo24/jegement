@@ -52,7 +52,13 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        //
+        $doc = Document::whereSlug($id)->first();
+
+        return view('demande', [
+            'document' => $doc,
+            'demandes' => $doc->demandes()->paginate(15),
+            'form' => 'forms.demande.create'
+        ]);
     }
 
     /**

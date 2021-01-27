@@ -1,29 +1,36 @@
 <div class="card-box">
     @include('layouts.info')
-    <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">{{ __('Modifier un article') }}</h5>
-    <form enctype="multipart/form-data" method="POST" action="{{ route('articles.update', $article->id_article) }}">
-        <input type="hidden" name="operation" value="0">
-        <input type="hidden" name="article" value="{{ $article->id_article }}">
+    <h5 class="text-uppercase mt-0 mb-3 bg-light p-2">{{ __('Modifier une demande') }}</h5>
+    <form enctype="multipart/form-data" method="POST" action="{{ route('demandes.update', $update->id_demande) }}">
+        <input type="hidden" name="document" value="{{ $document->id_document }}">
+        <input type="hidden" name="demande" value="{{ $update->id_demande }}">
         @csrf
-        @method('PUT')
-        <div class="mt-1">
-            <input type="file" name="image" data-plugins="dropify" data-default-file="{{ Storage::url($article->image) }}"  />
-            <p class="text-muted text-center mt-2 mb-0">{{ __('Logo') }}</p>
-        </div>
-        <div class="form-group mb-3">
-            <label for="product-meta-title">{{ __('Titre') }}:</label>
-            <input type="text" class="form-control" name="titre" value="{{ old('titre') ?? $article->titre }}">
+        @method("PUT")
+        <div class="row">
+            @foreach ($document->variables() as $variable)
+                @php
+                    $v = explode(":", $variable);
+                @endphp
+                <div class="col-md-4">
+                    <div class="form-group mb-3">
+                        <label for="product-meta-title">{{ $v[1] }}:</label>
+                        @if ($v[0] == "sexe" OR $v[0] == "sexe_requerant")
+                            <select class="form-control" name="{{ $v[0] }}">
+                                <option {{ (json_decode($update->variables, true)[$v[0]] == "Monsieur") ? 'selected':'' }} value="Monsieur">{{ __('Monsieur') }}</option>
+                                <option {{ (json_decode($update->variables, true)[$v[0]] == "Madame") ? 'selected':'' }} value="Madame">{{ __('Madame') }}</option>
+                            </select>
+                        @else
+                            <input placeholder="{{ ($v[0] == "requerant") ? 'Youssouf Donzo/Eleve/Yimbaya,Matoto,Conakry':"" }}" type="text" class="form-control" name="{{ $v[0] }}" value="{{ old($v[0]) ?? json_decode($update->variables, true)[$v[0]] }}">
+                        @endif
+                    </div>
+                </div>
+                @if ($v[0] == "etat_civil")
+                    <div class="w-100"></div>
+                @endif
+                
+            @endforeach
         </div>
 
-        <div class="form-group mb-3">
-            <label for="product-meta-title">{{ __('Lien externe') }}:</label>
-            <input type="text" class="form-control" name="url" value="{{ old('url') ?? $article->url }}">
-        </div>
-
-        <div class="form-group mb-0">
-            <label for="product-meta-description">{{ __('Description') }}:</label>
-            <textarea class="form-control" rows="5" name="description" placeholder="Please enter description">{{ old('description') ?? $article->description }}</textarea>
-        </div>
         <button class="btn btn-primary mt-2" type="submit">
             {{ __('Enregistrer') }}
         </button>
