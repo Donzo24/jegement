@@ -17,6 +17,8 @@
                                 <option value="Monsieur">{{ __('Monsieur') }}</option>
                                 <option value="Madame">{{ __('Madame') }}</option>
                             </select>
+                        @elseif($v[0] == "date_jour")
+                            <input placeholder="JJ/MM/AAAA" type="text" class="form-control" name="{{ $v[0] }}" value="{{ old($v[0]) }}">
                         @else
                             <input placeholder="{{ ($v[0] == "requerant") ? 'Youssouf Donzo/Eleve/Yimbaya,Matoto,Conakry':"" }}" type="text" class="form-control" name="{{ $v[0] }}" value="{{ old($v[0]) }}">
                         @endif
