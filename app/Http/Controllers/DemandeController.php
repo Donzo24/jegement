@@ -56,6 +56,10 @@ class DemandeController extends Controller
 
         $now = dateFormat(json_decode($demande->variables, true)['date_jour'], "mysql");
 
+        if (empty($now)) {
+            return back()->with('info', "Date du jour invalide");
+        }
+
         $mois = explode(" ", dateFormat($now))[1];
         $an = number_to_word(explode(" ", dateFormat($now))[2]);
         $jour = number_to_word(explode(" ", dateFormat($now))[0]);
@@ -72,7 +76,7 @@ class DemandeController extends Controller
         }
 
         if (!isset(json_decode($demande->variables, true)['requerant'])) {
-            return back()->with('msg', "Erreur");
+            return back()->with('info', "Information du requerant invalide");
         }
 
         $requerants = explode("/", json_decode($demande->variables, true)['requerant']);
