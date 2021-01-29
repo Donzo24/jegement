@@ -23,8 +23,25 @@ class DemandeCreateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+
+        $collection = collect($this->request->all());
+
+        $filtered = $collection->filter(function ($value, $key) {
+            return ($key != "_token" AND $key != "operation" AND $key != "demande");
+        });
+
+        foreach ($filtered as $key => $value) {
+            if (preg_match('/date/', $key)) {
+
+                $filtered = $filtered->merge([$key => 'date_format:d/m/Y']);
+            }else{
+                $filtered = $filtered->merge([$key => 'required']);
+            }
+            
+        }
+
+        //dd($filtered->all());
+
+        return $filtered->all();
     }
 }

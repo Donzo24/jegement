@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,11 @@ Route::middleware(['auth'])->group(function () {
 
 	Route::get('/home', function () {
 	    return view('home');
+	});
+
+	Route::get('/reset-db', function() {
+	    DB::table('demande')->truncate();
+
+	    return back();
 	});
 });

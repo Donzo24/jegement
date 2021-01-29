@@ -93,10 +93,14 @@ class DemandeController extends Controller
         if (json_decode($demande->variables, true)['sexe_requerant'] == "Monsieur") {
             $templateProcessor->setValue("genre", "Fils");
             $templateProcessor->setValue("accord_1", " ");
-            $templateProcessor->setValue("accord_2", "le requérant");
+            $templateProcessor->setValue("accord_2", "Le requérant");
+            $templateProcessor->setValue("accord_3", "le requérant");
+            $templateProcessor->setValue("accord_4", "du requérant");
         }else{
             $templateProcessor->setValue("accord_1", "e");
-            $templateProcessor->setValue("accord_2", "la requérante");
+            $templateProcessor->setValue("accord_2", "La requérante");
+            $templateProcessor->setValue("accord_3", "la requérante");
+            $templateProcessor->setValue("accord_4", "de la requérante");
             $templateProcessor->setValue("genre", "Fille");
         }
 
