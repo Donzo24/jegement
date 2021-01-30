@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Document};
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\{DocumentCreateRequest, DocumentUpdateRequest};
-use App\Gestions\GestionDocument;
+use App\Models\{Categorie, Utilisateur};
+use App\Http\Requests\AdminCreateRequest;
+use App\Gestions\GestionAdmin;
 
-class DocumentController extends Controller
+class AdministrateurController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +16,9 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        return view('document', [
-            'documents' => Document::paginate(10),
-            'form' => 'forms.document.create'
+        return view('administrateur', [
+            'form' => 'forms.administrateur.create',
+            'administrateurs' => Utilisateur::paginate(10)
         ]);
     }
 
@@ -39,7 +38,7 @@ class DocumentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DocumentCreateRequest $request, GestionDocument $gestion)
+    public function store(AdminCreateRequest $request, GestionAdmin $gestion)
     {
         return back()->with('info', $gestion->store($request));
     }
@@ -52,13 +51,7 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        $doc = Document::whereSlug($id)->first();
-
-        return view('demande', [
-            'document' => $doc,
-            'demandes' => $doc->demandes()->orderBy('date_creation', 'DESC')->paginate(15),
-            'form' => 'forms.demande.create'
-        ]);
+        //
     }
 
     /**
@@ -69,10 +62,10 @@ class DocumentController extends Controller
      */
     public function edit($id)
     {
-        return view('document', [
-            'documents' => Document::paginate(10),
-            'form' => 'forms.document.edit',
-            'document_update' => Document::whereSlug($id)->first()
+        return view('administrateur', [
+            'form' => 'forms.administrateur.edit',
+            'administrateurs' => Utilisateur::paginate(10),
+            'update' => Utilisateur::find($id)
         ]);
     }
 
@@ -83,9 +76,9 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DocumentUpdateRequest $request, GestionDocument $gestion, $id)
+    public function update(AdminCreateRequest $request, GestionAdmin $gestion, $id)
     {
-        return redirect('documents')->with('info', $gestion->update($request, $id));
+        return back()->with('info', trans('Utilisateur modifier avec succes'));
     }
 
     /**
@@ -94,7 +87,7 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GestionDocument $gestion, $id)
+    public function destroy(GestionAdmin $gestion, $id)
     {
         return response()->json([
             'status' => $gestion->delete($id),

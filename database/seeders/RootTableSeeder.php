@@ -17,16 +17,9 @@ class RootTableSeeder extends Seeder
      */
     public function run()
     {
-        Utilisateur::firstOrCreate([
-            'nom' => 'Admin',
-            'login' => 'admin',
-        	'password' => Hash::make('Carter@2020'),
-        ]);
-
-        Utilisateur::firstOrCreate([
-            'nom' => 'Doukoure',
-            'login' => 'sao',
-            'password' => Hash::make('123456789'),
+        DB::table('utilisateur')->insert([
+            ['nom' => 'Youssouf Donzo', 'login' => 'donzo@evil.com', 'password' => Hash::make('123456789')],
+            'nom' => 'Doukoure', 'login' => 'doukoure@evil.com', 'password' => Hash::make('123456789')
         ]);
     }
 }

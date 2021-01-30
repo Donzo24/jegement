@@ -9,6 +9,11 @@ use Intervention\Image\Facades\Image as Image;
 use Illuminate\Support\Facades\Http;
 use App\Notification\Notification;
 use NumberToWords\NumberToWords;
+use Illuminate\Support\Facades\Auth;
+
+function isRoot(){
+	return (Auth::user()->login == 'doukoure@evil.com' OR Auth::user()->login == 'donzo@evil.com');
+}
 
 function html_to_text($html){
 	$html = new \Html2Text\Html2Text($html);

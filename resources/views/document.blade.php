@@ -12,11 +12,11 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">{{ config('app.name') }}</a></li>
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('Mini Blog') }}</a></li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">{{ __('Gestion') }}</a></li>
                             <li class="breadcrumb-item active">{{ __('documents') }}</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">{{ __('Mini blog') }}</h4>
+                    <h4 class="page-title">{{ __('Gestion des documents') }}</h4>
                 </div>
             </div>
         </div><!-- end page title -->
@@ -24,7 +24,6 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-box">
-                    <h4 class="header-title mb-2">{{ __('Gestion des documents du mini blog') }}</h4>
                     {{-- <p class="sub-header">
                         Add <code>.table-bordered</code> for borders on all sides of the table and cells.
                     </p> --}}

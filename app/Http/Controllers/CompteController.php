@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\{Document};
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\{DocumentCreateRequest, DocumentUpdateRequest};
-use App\Gestions\GestionDocument;
+use App\Http\Requests\CompteRequest;
+use App\Gestions\GestionCompte;
+use App\Models\{Utilisateur, Partenaire};
+use Illuminate\Support\Facades\Validator;
 
-class DocumentController extends Controller
+class CompteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +18,7 @@ class DocumentController extends Controller
      */
     public function index()
     {
-        return view('document', [
-            'documents' => Document::paginate(10),
-            'form' => 'forms.document.create'
-        ]);
+        return view('profil');
     }
 
     /**
@@ -39,9 +37,9 @@ class DocumentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DocumentCreateRequest $request, GestionDocument $gestion)
+    public function store(CompteRequest $request, GestionCompte $gestion)
     {
-        return back()->with('info', $gestion->store($request));
+        return back()->with('info', $gestion->profil($request));
     }
 
     /**
@@ -52,13 +50,7 @@ class DocumentController extends Controller
      */
     public function show($id)
     {
-        $doc = Document::whereSlug($id)->first();
-
-        return view('demande', [
-            'document' => $doc,
-            'demandes' => $doc->demandes()->orderBy('date_creation', 'DESC')->paginate(15),
-            'form' => 'forms.demande.create'
-        ]);
+        //
     }
 
     /**
@@ -69,11 +61,7 @@ class DocumentController extends Controller
      */
     public function edit($id)
     {
-        return view('document', [
-            'documents' => Document::paginate(10),
-            'form' => 'forms.document.edit',
-            'document_update' => Document::whereSlug($id)->first()
-        ]);
+        //
     }
 
     /**
@@ -83,9 +71,13 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(DocumentUpdateRequest $request, GestionDocument $gestion, $id)
+    public function update(Request $request, GestionCompte $gestion, $id)
     {
-        return redirect('documents')->with('info', $gestion->update($request, $id));
+        Validator::make($request->all(), [
+            'password' => 'required|confirmed|min:5'
+        ])->validate();
+
+        return back()->with('info', $gestion->password($request));
     }
 
     /**
@@ -94,10 +86,8 @@ class DocumentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(GestionDocument $gestion, $id)
+    public function destroy($id)
     {
-        return response()->json([
-            'status' => $gestion->delete($id),
-        ]);
+        //
     }
 }

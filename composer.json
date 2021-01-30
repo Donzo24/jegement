@@ -16,7 +16,8 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
-        "phpoffice/phpword": "^0.17.0"
+        "phpoffice/phpword": "^0.17.0",
+        "riskihajar/terbilang": "^1.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

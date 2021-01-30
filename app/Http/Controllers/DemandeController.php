@@ -9,6 +9,7 @@ use App\Http\Requests\{DocumentCreateRequest, DemandeCreateRequest};
 use App\Gestions\{GestionDocument, GestionDemande};
 use Illuminate\Support\Facades\Storage;
 use PhpOffice\PhpWord\TemplateProcessor;
+use Terbilang;
 
 class DemandeController extends Controller
 {
@@ -103,9 +104,8 @@ class DemandeController extends Controller
             $templateProcessor->setValue("accord_4", "de la requérante");
             $templateProcessor->setValue("genre", "Fille");
         }
-
         
-        $templateProcessor->setValue("date_lettre", $date_lettre);
+        $templateProcessor->setValue("date_lettre",  preg_replace("#^Un#", "Premier", $date_lettre));
 
         $annee = explode("/", json_decode($demande->variables, true)['date_naissance'])[2];
 

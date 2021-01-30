@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>Starter | UBold - Responsive Admin Dashboard Template</title>
+        <title>{{ __('Evil Technologies') }} - {{ __('Generateur de document') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -20,7 +20,6 @@
 		<!-- icons -->
 		<link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         @yield('css')
-
     </head>
 
     <body>
@@ -32,86 +31,6 @@
             <div class="navbar-custom">
                 <div class="container-fluid">
                     <ul class="list-unstyled topnav-menu float-right mb-0">
-
-                        <li class="d-none d-lg-block">
-                            <form class="app-search">
-                                <div class="app-search-box dropdown">
-                                    <div class="input-group">
-                                        <input type="search" class="form-control" placeholder="Search..." id="top-search">
-                                        <div class="input-group-append">
-                                            <button class="btn" type="submit">
-                                                <i class="fe-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-menu dropdown-lg" id="search-dropdown">
-                                        <!-- item-->
-                                        <div class="dropdown-header noti-title">
-                                            <h5 class="text-overflow mb-2">Found 22 results</h5>
-                                        </div>
-            
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                            <i class="fe-home mr-1"></i>
-                                            <span>Analytics Report</span>
-                                        </a>
-            
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                            <i class="fe-aperture mr-1"></i>
-                                            <span>How can I help you?</span>
-                                        </a>
-                            
-                                        <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                            <i class="fe-settings mr-1"></i>
-                                            <span>User profile settings</span>
-                                        </a>
-
-                                        <!-- item-->
-                                        <div class="dropdown-header noti-title">
-                                            <h6 class="text-overflow mb-2 text-uppercase">Users</h6>
-                                        </div>
-
-                                        <div class="notification-list">
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                                <div class="media">
-                                                    <img class="d-flex mr-2 rounded-circle" src="assets/images/users/user-2.jpg" alt="Generic placeholder image" height="32">
-                                                    <div class="media-body">
-                                                        <h5 class="m-0 font-14">Erwin E. Brown</h5>
-                                                        <span class="font-12 mb-0">UI Designer</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                                <div class="media">
-                                                    <img class="d-flex mr-2 rounded-circle" src="assets/images/users/user-5.jpg" alt="Generic placeholder image" height="32">
-                                                    <div class="media-body">
-                                                        <h5 class="m-0 font-14">Jacob Deo</h5>
-                                                        <span class="font-12 mb-0">Developer</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-            
-                                    </div>  
-                                </div>
-                            </form>
-                        </li>
-    
-                        <li class="dropdown d-inline-block d-lg-none">
-                            <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="fe-search noti-icon"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-lg dropdown-menu-right p-0">
-                                <form class="p-3">
-                                    <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
-                                </form>
-                            </div>
-                        </li>
     
                         <li class="dropdown d-none d-lg-inline-block">
                             <a class="nav-link dropdown-toggle arrow-none waves-effect waves-light" data-toggle="fullscreen" href="#">
@@ -121,50 +40,22 @@
     
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="user-image" class="rounded-circle">
                                 <span class="pro-user-name ml-1">
                                     {{ Auth::user()->nom }} <i class="mdi mdi-chevron-down"></i> 
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
                                 <!-- item-->
-                                <div class="dropdown-header noti-title">
-                                    <h6 class="text-overflow m-0">Welcome !</h6>
-                                </div>
-    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-user"></i>
-                                    <span>My Account</span>
+                                <a href="javascript:void(0);" class="dropdown-item notify-item" onclick="event.preventDefault();
+                                document.getElementById('logout-form-2').submit();">
+                                    <i class="fe-log-out mr-1"></i>
+                                    <span>{{ __('Déconnexion') }}</span>
                                 </a>
-    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-settings"></i>
-                                    <span>Settings</span>
-                                </a>
-    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-lock"></i>
-                                    <span>Lock Screen</span>
-                                </a>
-    
-                                <div class="dropdown-divider"></div>
-    
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-log-out"></i>
-                                    <span>Logout</span>
-                                </a>
+                                <form id="logout-form-2" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
     
                             </div>
-                        </li>
-    
-                        <li class="dropdown notification-list">
-                            <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect waves-light">
-                                <i class="fe-settings noti-icon"></i>
-                            </a>
                         </li>
     
                     </ul>
@@ -224,46 +115,37 @@
 
                     <!-- User box -->
                     <div class="user-box text-center">
-                        <img src="assets/images/users/user-1.jpg" alt="user-img" title="Mat Helme"
-                            class="rounded-circle avatar-md">
                         <div class="dropdown">
                             <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block"
-                                data-toggle="dropdown">Geneva Kennedy</a>
+                                data-toggle="dropdown">{{ Auth::user()->nom }}</a>
                             <div class="dropdown-menu user-pro-dropdown">
-
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-user mr-1"></i>
-                                    <span>My Account</span>
-                                </a>
-
                                 <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-settings mr-1"></i>
-                                    <span>Settings</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-lock mr-1"></i>
-                                    <span>Lock Screen</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="javascript:void(0);" class="dropdown-item notify-item" onclick="event.preventDefault();
+                                document.getElementById('logout-form-2').submit();">
                                     <i class="fe-log-out mr-1"></i>
-                                    <span>Logout</span>
+                                    <span>{{ __('Déconnexion') }}</span>
                                 </a>
+                                <form id="logout-form-2" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
 
                             </div>
                         </div>
-                        <p class="text-muted">Admin Head</p>
+                        
                     </div>
 
                     <!--- Sidemenu -->
                     <div id="sidebar-menu">
 
                         <ul id="side-menu">
+
+                            <li>
+                                <a href="/home">
+                                    <i class="mdi mdi-clover"></i>
+                                    <span> {{ __('Tableau de bord') }} </span>
+                                </a>
+                            </li>
 
                             <li>
                                 <a href="{{ route('documents.index') }}">
@@ -275,11 +157,41 @@
                             @foreach ($templates as $template)
                                 <li>
                                     <a href="{{ route('documents.show', $template->slug) }}">
-                                        <i data-feather="calendar"></i>
+                                        <i class="mdi mdi-bookmark-multiple-outline"></i>
                                         <span> {{ $template->nom }} </span>
                                     </a>
                                 </li>
                             @endforeach
+
+                            <li>
+                                <a href="{{ route('utilisateurs.index') }}">
+                                    <i class="mdi mdi-account-cog"></i>
+                                    <span> {{ __('Administrateurs') }} </span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ route('compte.index') }}">
+                                    <i class="mdi mdi-account"></i>
+                                    <span> {{ __('Mon compte') }} </span>
+                                </a>
+                            </li>
+
+                            @if (isRoot())
+                                <li>
+                                    <a href="/mise-a-jours">
+                                        <i class="mdi mdi-update"></i>
+                                        <span> {{ __('Mise a jours') }} </span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="/reset-db">
+                                        <i class="mdi mdi-update"></i>
+                                        <span> {{ __('Renitialiser') }} </span>
+                                    </a>
+                                </li>
+                            @endif
                                 
                         </ul>
 
