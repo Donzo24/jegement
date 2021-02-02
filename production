@@ -1,18 +1,18 @@
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=base64:H9kRnqmy5S+7JuyrOVHQcrSDfF7lxJn3K4Ez/wUuqUc=
-APP_DEBUG=true
-APP_URL=http://jugement.eviltech.org
+APP_NAME=Evil
+APP_ENV=production
+APP_KEY=
+APP_DEBUG=false
+APP_URL=http://localhost
 
 LOG_CHANNEL=stack
 LOG_LEVEL=debug
 
 DB_CONNECTION=mysql
-DB_HOST=10.120.3.122
+DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=evilwrer_jugement
-DB_USERNAME=evilwrer_jugement
-DB_PASSWORD=AaL9i4XSoF$z
+DB_DATABASE=casier
+DB_USERNAME=root
+DB_PASSWORD=
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
