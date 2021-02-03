@@ -166,12 +166,7 @@
                                 </li>
                             @endforeach
 
-                            <li>
-                                <a href="{{ route('utilisateurs.index') }}">
-                                    <i class="mdi mdi-account-cog"></i>
-                                    <span> {{ __('Administrateurs') }} </span>
-                                </a>
-                            </li>
+                            
 
                             <li>
                                 <a href="{{ route('compte.index') }}">
@@ -181,6 +176,13 @@
                             </li>
 
                             @if (isRoot())
+
+                                <li>
+                                    <a href="{{ route('utilisateurs.index') }}">
+                                        <i class="mdi mdi-account-cog"></i>
+                                        <span> {{ __('Administrateurs') }} </span>
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="/mise-a-jours">
                                         <i class="mdi mdi-update"></i>

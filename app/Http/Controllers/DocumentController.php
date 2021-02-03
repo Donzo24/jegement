@@ -7,6 +7,8 @@ use App\Models\{Document};
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\{DocumentCreateRequest, DocumentUpdateRequest};
 use App\Gestions\GestionDocument;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
@@ -18,7 +20,7 @@ class DocumentController extends Controller
     public function index()
     {
         return view('document', [
-            'documents' => Document::paginate(10),
+            'documents' => Auth::user()->demandes()->paginate(10),
             'form' => 'forms.document.create'
         ]);
     }
@@ -70,7 +72,7 @@ class DocumentController extends Controller
     public function edit($id)
     {
         return view('document', [
-            'documents' => Document::paginate(10),
+            'documents' => Auth::user()->demandes()->paginate(10),
             'form' => 'forms.document.edit',
             'document_update' => Document::whereSlug($id)->first()
         ]);
