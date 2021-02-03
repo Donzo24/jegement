@@ -147,12 +147,15 @@
                                 </a>
                             </li>
 
-                            <li>
-                                <a href="{{ route('documents.index') }}">
-                                    <i data-feather="settings"></i>
-                                    <span> Parametres </span>
-                                </a>
-                            </li>
+                            @if (isRoot())
+                                <li>
+                                    <a href="{{ route('documents.index') }}">
+                                        <i data-feather="settings"></i>
+                                        <span> Parametres </span>
+                                    </a>
+                                </li>
+                            @endif
+                                
 
                             @foreach ($templates as $template)
                                 <li>
