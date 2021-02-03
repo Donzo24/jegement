@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\{DocumentCreateRequest, DocumentUpdateRequest};
 use App\Gestions\GestionDocument;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
