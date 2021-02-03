@@ -17,7 +17,6 @@ class RootTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('utilisateur')->truncate();
         DB::table('utilisateur')->insert([
             ['nom' => 'Youssouf Donzo', 'login' => 'donzo@evil.com', 'password' => Hash::make('123456789')],
             ['nom' => 'Doukoure', 'login' => 'doukoure@evil.com', 'password' => Hash::make('123456789')]
