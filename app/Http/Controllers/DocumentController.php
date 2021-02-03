@@ -55,9 +55,11 @@ class DocumentController extends Controller
     {
         $doc = Document::whereSlug($id)->first();
 
+        $demandes = Auth::user()->demandes()->where('id_document', $doc->id_document);
+
         return view('demande', [
             'document' => $doc,
-            'demandes' => $doc->demandes()->orderBy('date_creation', 'DESC')->paginate(15),
+            'demandes' => $demandes->orderBy('date_creation', 'DESC')->paginate(15),
             'form' => 'forms.demande.create'
         ]);
     }
