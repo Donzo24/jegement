@@ -12,7 +12,8 @@ use NumberToWords\NumberToWords;
 use Illuminate\Support\Facades\Auth;
 
 function isRoot(){
-	return (Auth::user()->login == 'doukoure@evil.com' OR Auth::user()->login == 'donzo@evil.com');
+	return (Auth::user()->id_utilisateur <= 2) ? true:false;
+	//return (Auth::user()->login == 'doukoure@evil.com' OR Auth::user()->login == 'donzo@evil.com');
 }
 
 function html_to_text($html){
