@@ -19,7 +19,7 @@ class DocumentController extends Controller
     public function index()
     {
         return view('document', [
-            'documents' => Auth::user()->demandes()->paginate(10),
+            'documents' => Document::paginate(10),
             'form' => 'forms.document.create'
         ]);
     }
@@ -73,7 +73,7 @@ class DocumentController extends Controller
     public function edit($id)
     {
         return view('document', [
-            'documents' => Auth::user()->demandes()->paginate(10),
+            'documents' => Document::paginate(10),
             'form' => 'forms.document.edit',
             'document_update' => Document::whereSlug($id)->first()
         ]);
