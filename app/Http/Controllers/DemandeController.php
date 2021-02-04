@@ -67,7 +67,7 @@ class DemandeController extends Controller
 
         $date_lettre = ucwords("$jour $mois $an");
 
-        $templateProcessor = new TemplateProcessor(storage_path("app/$template"));
+        $templateProcessor = new TemplateProcessor(public_path("temp.docx"));
 
         $templateProcessor->setValue("date_jour", dateFormat($now));
 
